@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${title}"></title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+</head>
+<body>
+<header th:insert="blocks/header::header"></header>
+<form th:action="@{/redactor}" method="post" th:object="${redactor}">
+  <img class="mb-4" src="https://sun9-12.userapi.com/c824503/v824503183/c0b38/RUMG4rHurDo.jpg" alt="" width="150" height="57">
+  <h1 class="h3 mb-3 fw-normal">Please create your profile</h1>
+  <div class="form-floating">
+    <label for="name">Your name</label>
+    <br>
+    <input type="text" th:field="*{name}" class="form-control" id="name">
+  </div>
+  <div class="form-floating">
+    <label for="surname">Your surname </label>
+    <br>
+    <input type="text"  th:field="*{surname}" class="form-control" id="surname">
+  </div>
+  <div class="form-floating">
+    <label for="floatingInput">Email address</label>
+    <br>
+    <input type="email"  th:field="*{mail}" class="form-control" id="floatingInput">
+  </div>
+  <input type="submit" value="Create"/>
+</form>
+
+<header th:insert="blocks/footer::footer"></header>
+</body>
+</html>

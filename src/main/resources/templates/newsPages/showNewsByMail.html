@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}"></title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+</head>
+<body>
+<header th:insert="blocks/header::header"></header>
+<div th:each="news_ : ${newsByMail}">
+    <br>
+    <p th:text="${news_.getTime()} +
+   ${space} +
+   ${news_.getRedactor().getSurname()} +
+   ${space} +
+   ${news_.getRedactor().getName()}
+"></p>
+    <br>
+<!--    <a th:href="@{/news/id(id=${news_.getID()})}"><p th:text="${news_.getFullText()}"></p></a>-->
+    <br>
+</div>
+<header th:insert="blocks/footer::footer"></header>
+</body>
+</html>
