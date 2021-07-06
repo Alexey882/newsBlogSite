@@ -37,9 +37,10 @@ public String success(){
 }
 @PostMapping()
     public String createAndSave(@ModelAttribute("redactor")Redactor redactor , Model model){
+     redactor.setID(redactorRepository.count()+1);
      redactorRepository.save(redactor);
      model.addAttribute("title","success");
-     return "redirect:/successPage";
+     return "redirect:/redactor/successPage";
 }
 
 

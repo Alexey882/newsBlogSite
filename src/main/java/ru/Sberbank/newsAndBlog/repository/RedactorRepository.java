@@ -10,5 +10,8 @@ public interface RedactorRepository extends CrudRepository<Redactor , Long> {
 @Query(value = "select id from redactor where mail = :mail limit 1" ,
 nativeQuery = true)
 long findIdByMail(@Param("mail")String mail);
-
+    @Query(value = "select count(*) from redactor",
+            nativeQuery = true
+    )
+    long count();
 }

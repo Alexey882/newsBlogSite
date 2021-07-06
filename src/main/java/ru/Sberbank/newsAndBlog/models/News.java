@@ -3,8 +3,8 @@ import javax.persistence.*;
 @Entity
 public class News {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long ID;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private long ID = 4;
     private String time , fullText ;
     private double rating;
     private String category;

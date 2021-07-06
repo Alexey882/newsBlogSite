@@ -55,6 +55,7 @@ public class NewsController {
     @PostMapping
     public String createAnonymousNews(@ModelAttribute("news") News news) {
         news.setTime(new Date().toString());
+        news.setID(newsRepository.count()+1);
         newsRepository.save(news);
         return "mainPage/mainPage";
     }
@@ -70,6 +71,7 @@ public class NewsController {
     @PostMapping("/create")
     public String createNews(@ModelAttribute("news") News news , @ModelAttribute("redactor")Redactor redactor) {
         news.setTime(new Date().toString());
+        news.setID(newsRepository.count()+1);
         news.setRedactor(redactor);
         newsRepository.save(news);
         return "mainPage/mainPage";
@@ -154,6 +156,7 @@ public class NewsController {
     }
     @GetMapping("/showByMail/{mail}")
     public String showByMail(@PathVariable("mail")String mail ,  Model model){
+
         model.addAttribute("title" , "showByMail");
         long id_redactor = redactorRepository.findIdByMail(mail);
         model.addAttribute("newsByMail",newsRepository.findNewsByIdRedactor(id_redactor));

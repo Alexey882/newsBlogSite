@@ -9,7 +9,7 @@
 <header th:insert="blocks/header::header"></header>
 <div th:each="category_ : ${category}">
 <br>
-    <a th:href="@{/{category}(category = ${category_})}"><p th:text="${category_}"></p></a>
+    <a th:href="@{category/{category}(category = ${category_})}"><p th:text="${category_}"></p></a>
 <br>
 </div>
 <header th:insert="blocks/footer::footer"></header>

@@ -13,6 +13,12 @@ public interface NewsRepository extends CrudRepository<News,Long> {
     )
     Collection<News> findBestNews();
 
+    @Query(value = "select count(*) from news",
+    nativeQuery = true
+    )
+    long count();
+
+
     @Query(value = "select * from news where id = :id  ",
             nativeQuery = true
     )
@@ -29,7 +35,7 @@ public interface NewsRepository extends CrudRepository<News,Long> {
     Collection<News> findAllByCategory(@Param("category") String category);
 
 
-    @Query(value = "select category from news",
+    @Query(value = "select distinct category from news",
             nativeQuery = true
     )
     Collection<String> findAllCategory();

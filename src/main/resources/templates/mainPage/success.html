@@ -2,21 +2,12 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title th:text="${title}"></title>
+  <title>Success downlaod</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
 </head>
 <body>
 <header th:insert="blocks/header::header"></header>
-<div th:each="news : ${newsByCategory}">
-  <br>
-  <div th:each="info: ${news}">
-    <p th:text="${info}"></p>
-    <br>
-  </div>
-  <br>
-<!--  <a th:href="@{/templates/newsPages/id(id=${news_.getID()})}"><p th:text="${news_.getFullText()}"></p></a>-->
-  <br>
-</div>
+  <p> DOWNLOAD SUCCESS , CHECK YOUR COMPUTER DOWNLOADS </p>
 <header th:insert="blocks/footer::footer"></header>
 </body>
 </html>

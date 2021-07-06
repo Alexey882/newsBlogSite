@@ -6,10 +6,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import ru.Sberbank.newsAndBlog.models.News;
 import ru.Sberbank.newsAndBlog.repository.NewsRepository;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Iterator;
 
 @Controller
 public class MainPageController {
@@ -24,21 +27,31 @@ public class MainPageController {
         return "mainPage/mainPage";
     }
 
-    @GetMapping("/downloads")
-    public void getFile(HttpServletResponse response) {
-        Path file = Paths.get("C://");
-        if (Files.exists(file)){
-            response.setHeader("Content-disposition", "attachment;filename=" + "news.txt");
-            response.setContentType("application/vnd.ms-excel");
+    @GetMapping("/download")
+    public String getFile() throws IOException {
+        String path = "C://users//ab448//Downloads";
+        File file = new File(path+"//news.txt");
+        if(!file.exists())
+            file.createNewFile();
+        FileWriter fw = new FileWriter(file);
+        Iterable<News> news = newsRepository.findAll();
+        Iterator<News> iterator = news.iterator();
+        while (iterator.hasNext()) {
+            News news_ = iterator.next();
+            if (news_.getRedactor() == null) {
+                fw.write(news_.getTime() + '\n');
+                fw.write("anonymic" + '\n');
+                fw.write(news_.getFullText() + '\n');
+            } else {
+                fw.write(news_.getTime() + '\n');
+                fw.write(news_.getRedactor().getSurname() + '\n');
+                fw.write(news_.getRedactor().getName() + '\n');
+                fw.write(news_.getFullText() + '\n');
 
-            try {
-                Iterable<News> news = newsRepository.findAll();
-               // Files.copy(file, );
-                response.getOutputStream().flush();
-            } catch (IOException e) {
-                throw new RuntimeException("IOError writing file to output stream");
             }
         }
+        fw.close();
+        return "mainPage/success";
     }
 
 }
